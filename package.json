@@ -4,7 +4,7 @@
   "description": "🤖 A simple bot designed for programmers",
   "main": "app.js",
   "repository": "https://github.com/coders-lounge/bot.git",
-  "author": "Matta#6011,SIMPLE MARK#3941",
+  "author": "Matta#6011",
   "license": "GNU GPLv3.0",
   "private": true,
   "dependencies": {
