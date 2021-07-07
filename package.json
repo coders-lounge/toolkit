@@ -1,0 +1,13 @@
+{
+  "name": "toolkit-bot",
+  "version": "0.1.0",
+  "description": "🤖 A simple bot designed for programmers",
+  "main": "index.js",
+  "repository": "https://github.com/coders-lounge/bot.git",
+  "author": "Matta#6011",
+  "license": "GNU GPLv3.0",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
