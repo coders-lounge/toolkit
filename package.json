@@ -1,10 +1,10 @@
 {
-  "name": "toolkit-bot",
+  "name": "developers-toolkit-bot",
   "version": "0.1.0",
   "description": "🤖 A simple bot designed for programmers",
-  "main": "index.js",
+  "main": "app.js",
   "repository": "https://github.com/coders-lounge/bot.git",
-  "author": "Matta#6011",
+  "author": "Matta#6011,SIMPLE MARK#3941",
   "license": "GNU GPLv3.0",
   "private": true,
   "dependencies": {
