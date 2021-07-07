@@ -1,6 +1,6 @@
 # 🤖 Coders's Lounge
 
-The website for [discord.gg/rGYDCPkUmU](https://discord.com/invite/rGYDCPkUmU). Created with **node** and **discord.js**
+The bot for [discord.gg/rGYDCPkUmU](https://discord.com/invite/rGYDCPkUmU). Created with **node** and **discord.js**
 
 ## Features
 
