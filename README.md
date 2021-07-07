@@ -1,6 +1,6 @@
 # 🤖 Coders's Lounge
 
-The bot for [discord.gg/rGYDCPkUmU](https://discord.com/invite/rGYDCPkUmU). Created with **node** and **discord.js**
+Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) for more info. Created with **Node.js** and **Discord.js**
 
 ## Features
 
@@ -13,7 +13,7 @@ The bot for [discord.gg/rGYDCPkUmU](https://discord.com/invite/rGYDCPkUmU). Crea
 Clone the project
 
 ```bash
-  git clone https://github.com/coders-lounge/bot.git
+  git clone https://github.com/coders-lounge/programmers-toolkit.git
 ```
 
 Go to the project directory
@@ -29,27 +29,38 @@ Install dependencies
   # or
   npm install
 ```
+Set Tokens and values
+
+> :warning: **No public API keys are provided in the bot! Make your own to develop the bot.**
+
+Please fill the .env file with the API keys & tokens.
+
+```bash
+  TOKEN= #Your token here
+  DATABASE= #Your database token here
+```
 
 Start the bot
 
 ```bash
-  yarn dev
+  yarn start
   # or
-  npm run dev
+  npm start
 ```
 
 ## Contributing (coming soon)
 
 Contributions are always welcome!
 
-See [`contributing.md`](/CONTRIBUTING.md) for ways to get started.
+Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) to see how to contribute.
 
-Please adhere to this project's [`code of conduct`](/CODE_OF_CONDUCT.md).
+Please add here to this project's [`code of conduct`](/CODE_OF_CONDUCT.md).
 
 ## Feedback
 
 If you have any feedback, please reach out to us via Discord
 
-## Authors
+## Contributors
 
 - [@MattA-Official](https://www.github.com/MattA-Official) - MattA#6011
+- [@THE-SIMPLE-MARK](https://www.github.com/THE-SIMPLE-MARK) - SIMPLE MARK#3941
