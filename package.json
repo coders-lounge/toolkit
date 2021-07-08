@@ -1,8 +1,8 @@
 {
   "name": "developers-toolkit-bot",
   "version": "0.1.0",
-  "description": "🤖 A simple bot designed for programmers",
-  "main": "app.js",
+  "description": "🤖 A Discord bot designed for programmers",
+  "main": "bot.js",
   "repository": "https://github.com/coders-lounge/bot.git",
   "author": "Matta#6011",
   "license": "GNU GPLv3.0",
