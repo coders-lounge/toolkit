@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "description": "🤖 A Discord bot designed for programmers",
   "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
   "repository": "https://github.com/coders-lounge/bot.git",
   "author": "Matta#6011",
   "license": "GNU GPLv3.0",
   "private": true,
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "mongoose": "^5.13.2"
   }
 }
