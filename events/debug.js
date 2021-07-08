@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'g',
+    name: 'debug',
     once: false,
     execute: (client, info) => {
         console.log(info)
