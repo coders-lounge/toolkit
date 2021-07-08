@@ -1,11 +1,25 @@
 const { requireAll } = require('./helpers');
 
 class registry {
+	/**
+	 * Registers all events and commands
+	 * @param {object} client - Instance of the bot
+	 * @param {string} commandsDir - Directory where the commands are located
+	 * @param {string} eventsDir - Directory where the events are located
+	 * @constructor
+	 * @returns {registry}
+	 * */
 	constructor(client, commandsDir, eventsDir) {
 		if (commandsDir) this.registerCommands(client, commandsDir);
 		if (eventsDir) this.registerEvents(client, eventsDir);
 	}
 
+	/**
+	 * Registers a single command
+	 * @param {object} client - Instance of the bot
+	 * @param {object} command - The command to register
+	 * @returns {void}
+	 * */
 	registerCommand(client, command) {
 		console.log(command);
 		if (
@@ -38,6 +52,12 @@ class registry {
 		client.emit('debug', `Registered command: ${command.name}.`);
 	}
 
+	/**
+	 * Registers all commands in a directory
+	 * @param {object} client - Instance of the bot
+	 * @param {string} dir - Directory where the commands are located
+	 * @returns {void}
+	 * */
 	registerCommands(client, dir) {
 		const obj = requireAll(dir);
 		const commands = [];
@@ -57,6 +77,12 @@ class registry {
 		}
 	}
 
+	/**
+	 * Registers a single event
+	 * @param {object} client - Instance of the bot
+	 * @param {object} command - The event to register
+	 * @returns {void}
+	 * */
 	registerEvent(client, event) {
 		console.log(event);
 		if (event.once) {
@@ -67,6 +93,12 @@ class registry {
 		client.emit('debug', `Registered event: ${event.name}.`);
 	}
 
+	/**
+	 * Registers all events in a directory
+	 * @param {object} client - Instance of the bot
+	 * @param {string} dir - Directory where the events are located
+	 * @returns {void}
+	 * */
 	registerEvents(client, dir) {
 		const obj = requireAll(dir);
 		const events = [];

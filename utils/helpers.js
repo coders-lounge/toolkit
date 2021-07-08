@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+/**
+ * node.js require all files in a directory
+ * @param {string} dirname - directory to search for files
+ * @returns {object}
+ * */
 function requireAll(dirname) {
 	const modules = {};
 
