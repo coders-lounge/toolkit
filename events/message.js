@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 module.exports = {
     name: 'message',
     once: false,
-    execute: (message) => {
+    execute: (client, message) => {
         //Stuff here
     },
 };
