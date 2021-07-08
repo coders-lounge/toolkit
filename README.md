@@ -1,4 +1,4 @@
-# 🤖 Coders's Lounge
+# 🤖 Programmer's Toolkit Discord Bot
 
 Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) for more info. Created with **Node.js** and **Discord.js**
 
@@ -6,49 +6,7 @@ Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) for more info. C
 
 - Nothing 🙂
 
-### Coming Soon...
-
-## Development
-
-Clone the project
-
-```bash
-  git clone https://github.com/coders-lounge/programmers-toolkit.git
-```
-
-Go to the project directory
-
-```bash
-  cd bot
-```
-
-Install dependencies
-
-```bash
-  yarn install
-  # or
-  npm install
-```
-Set Tokens and values
-
-> :warning: **No public API keys are provided in the bot! Make your own to develop the bot.**
-
-Please fill the .env file with the API keys & tokens.
-
-```bash
-  TOKEN= #Your token here
-  DATABASE= #Your database token here
-```
-
-Start the bot
-
-```bash
-  yarn start
-  # or
-  npm start
-```
-
-## Contributing (coming soon)
+## Contributing
 
 Contributions are always welcome!
 
@@ -56,7 +14,7 @@ Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) to see how to co
 
 ## Feedback
 
-If you have any feedback, please reach out to us via Discord
+If you have any feedback, please reach out to us via Discord.
 
 ## Contributors
 
