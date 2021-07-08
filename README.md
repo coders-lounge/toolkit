@@ -54,8 +54,6 @@ Contributions are always welcome!
 
 Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) to see how to contribute.
 
-Please add here to this project's [`code of conduct`](/CODE_OF_CONDUCT.md).
-
 ## Feedback
 
 If you have any feedback, please reach out to us via Discord
