@@ -21,7 +21,6 @@ class registry {
 	 * @returns {void}
 	 * */
 	registerCommand(client, command) {
-		console.log(command);
 		if (
 			client.commands.some(
 				(cmd) =>
@@ -84,7 +83,6 @@ class registry {
 	 * @returns {void}
 	 * */
 	registerEvent(client, event) {
-		console.log(event);
 		if (event.once) {
 			client.once(event.name, (...args) => event.execute(client, ...args));
 		} else {
