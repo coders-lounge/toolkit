@@ -1,6 +1,6 @@
 # 🤖 Programmer's Toolkit Discord Bot
 
-Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) for more info. Created with **Node.js** and **Discord.js**. Command/Event handler based on [https://github.com/MattA-Official/bot]
+Please join our [Discord Server](https://discord.gg/rGYDCPkUmU) for more info. Created with **Node.js** and **Discord.js**. Command/Event handler based on https://github.com/MattA-Official/bot
 
 ## Features
 
