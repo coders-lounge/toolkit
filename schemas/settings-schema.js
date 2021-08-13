@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const settings = mongoose.Schema({
     serverID: { type: String, required: true },
 })
-module.exports = mongoose.model('settings', settings)
+export default mongoose.model('settings', settings)

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "🤖 A Discord bot designed for programmers",
   "main": "bot.js",
+  "type": "module",
   "scripts": {
     "start": "node bot.js"
   },

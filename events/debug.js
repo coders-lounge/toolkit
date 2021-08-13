@@ -1,7 +1,4 @@
-module.exports = {
-    name: 'debug',
-    once: false,
-    execute: (client, info) => {
-        console.log(info)
-    },
-};
+export const name = 'debug';
+export const execute = (client, info) => {
+    console.log(info);
+},;

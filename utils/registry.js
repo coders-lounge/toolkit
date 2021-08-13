@@ -1,120 +1,88 @@
-const { requireAll } = require('./helpers');
+import * as fs from 'fs/promises';
+const debug = process.argv.includes('--debug');
 
-class registry {
-	/**
-	 * Registers all events and commands
-	 * @param {object} client - Instance of the bot
-	 * @param {string} commandsDir - Directory where the commands are located
-	 * @param {string} eventsDir - Directory where the events are located
-	 * @constructor
-	 * @returns {registry}
-	 * */
-	constructor(client, commandsDir, eventsDir) {
-		if (commandsDir) this.registerCommands(client, commandsDir);
-		if (eventsDir) this.registerEvents(client, eventsDir);
+const commands = async (client, dir) => {
+	const files = await fs.readdir(dir).catch(() => []);
+
+	if (!files) return;
+
+	for await (const file of files) {
+		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
+			commands(client, `./${dir}/${file}`);
+			continue;
+		}
+
+		const command = await import(`../${dir}/${file}`);
+		if (!command.data) {
+			if (debug) console.log(`${dir}/${file} > no data`);
+			continue;
+		};
+		client.commands.set(command.data.name, command);
+		if (debug) console.log(`command ${command.data.name} > registered`);
 	}
+};
 
-	/**
-	 * Registers a single command
-	 * @param {object} client - Instance of the bot
-	 * @param {object} command - The command to register
-	 * @returns {void}
-	 * */
-	registerCommand(client, command) {
-		if (
-			client.commands.some(
-				(cmd) =>
-					cmd.name === command.name || cmd.aliases?.includes(command.name)
-			)
-		) {
-			return client.emit(
-				'error',
-				`A command with the name/alias "${command.name}" is already registered.`
-			);
-		}
-		if (command.aliases) {
-			for (const alias of command.aliases) {
-				if (
-					client.commands.some(
-						(cmd) => cmd.name === alias || cmd.aliases?.includes(alias)
-					)
-				) {
-					return client.emit(
-						'error',
-						`A command with the name/alias "${alias}" is already registered.`
-					);
-				}
-			}
+const buttons = async (client, dir) => {
+	const files = await fs.readdir(dir).catch(() => []);
+
+	if (!files) return;
+
+	for await (const file of files) {
+		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
+			buttons(client, `./${dir}/${file}`);
+			continue;
 		}
 
-		client.commands.set(command.name, command);
-		client.emit('debug', `Registered command: ${command.name}.`);
+		const button = await import(`../${dir}/${file}`);
+		if (!button.data) {
+			if (debug) console.log(`${dir}/${file} > no data`);
+			continue;
+		};
+		client.buttons.set(button.data.id, button);
+		if (debug) console.log(`button ${button.data.name} > registered`);
 	}
+};
 
-	/**
-	 * Registers all commands in a directory
-	 * @param {object} client - Instance of the bot
-	 * @param {string} dir - Directory where the commands are located
-	 * @returns {void}
-	 * */
-	registerCommands(client, dir) {
-		const obj = requireAll(dir);
-		const commands = [];
-		for (const command of Object.values(obj)) {
-			commands.push(command);
+const menus = async (client, dir) => {
+	const files = await fs.readdir(dir).catch(() => []);
+
+	if (!files) return;
+
+	for await (const file of files) {
+		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
+			menus(client, `./${dir}/${file}`);
+			continue;
 		}
-		for (const command of commands) {
-			// TODO: Add better validity checks
-			if (!command) {
-				client.emit(
-					'warn',
-					`Attempting to register an invalid command object: ${command}; skipping.`
-				);
-				continue;
-			}
-			this.registerCommand(client, command);
-		}
+
+		const menu = await import(`../${dir}/${file}`);
+		if (!menu.data) {
+			if (debug) console.log(`${dir}/${file} > no data`);
+			continue;
+		};
+		client.menus.set(menu.data.id, menu);
+		if (debug) console.log(`menu ${menu.data.name} > registered`);
 	}
+};
 
-	/**
-	 * Registers a single event
-	 * @param {object} client - Instance of the bot
-	 * @param {object} command - The event to register
-	 * @returns {void}
-	 * */
-	registerEvent(client, event) {
+const events = async (client, dir) => {
+	const files = await fs.readdir(dir).catch(() => []);
+
+	if (!files) return;
+
+	for await (const file of files) {
+		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
+			events(client, `./${dir}/${file}`);
+			continue;
+		}
+
+		const event = await import(`../${dir}/${file}`);
+
 		if (event.once) {
 			client.once(event.name, (...args) => event.execute(client, ...args));
 		} else {
 			client.on(event.name, (...args) => event.execute(client, ...args));
 		}
-		client.emit('debug', `Registered event: ${event.name}.`);
 	}
+};
 
-	/**
-	 * Registers all events in a directory
-	 * @param {object} client - Instance of the bot
-	 * @param {string} dir - Directory where the events are located
-	 * @returns {void}
-	 * */
-	registerEvents(client, dir) {
-		const obj = requireAll(dir);
-		const events = [];
-		for (const event of Object.values(obj)) {
-			events.push(event);
-		}
-		for (const event of events) {
-			// TODO: Add better validity checks
-			if (!event) {
-				client.emit(
-					'warn',
-					`Attempting to register an invalid event object: ${event}; skipping.`
-				);
-				continue;
-			}
-			this.registerEvent(client, event);
-		}
-	}
-}
-
-module.exports = registry;
+export { commands, buttons, menus, events };

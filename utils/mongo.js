@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-require('dotenv').config()
+import mongoose from 'mongoose';
+import 'dotenv/config';
 
-module.exports = async () => {
+export default async () => {
     await mongoose.connect(process.env.DB_PATH, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     return mongoose
 }
