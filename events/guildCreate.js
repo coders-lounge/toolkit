@@ -2,6 +2,7 @@ import mongo from '../utils/mongo.js';
 import settingsSchema from '../schemas/settings-schema.js';
 
 export const name = 'guildCreate';
+
 export const execute = async (client, guild) => {
     // guild settings manager
     await mongo().then(async () => {

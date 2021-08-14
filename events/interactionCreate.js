@@ -1,4 +1,5 @@
 export const name = 'interactionCreate';
+
 export const execute = async (client, interaction) => {
 	// CHAT_INPUT, USER, & MESSAGE commands
 	if (interaction.isCommand()) {

@@ -2,6 +2,7 @@ import mongo from '../utils/mongo.js';
 
 export const name = 'ready';
 export const once = true;
+
 export const execute = async (client) => {
     console.log(`${client.user.tag} >> Logged in!`);
     // log into the database
