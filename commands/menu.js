@@ -6,6 +6,7 @@ export const data = {
 };
 
 export const execute = async (client, interaction) => {
+    // create menu with two options
 	const menu = new MessageSelectMenu()
 		.setCustomId('select')
 		.setPlaceholder('Nothing selected')
@@ -22,7 +23,9 @@ export const execute = async (client, interaction) => {
 			},
 		]);
 
+    // add menu to an action row
 	const row = new MessageActionRow().addComponents(menu);
 
+    // respond with message and action row
 	await interaction.reply({ content: 'ping...', components: [row] });
 };
