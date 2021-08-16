@@ -24,11 +24,42 @@ const commands = async (client, dir) => {
 			// debug message
 			if (debug) console.log(`${dir}/${file} > no data`);
 			continue;
-		};
+		}
+		command.data.type = 'CHAT_INPUT';
 		// add command to collection
 		client.commands.set(command.data.name, command);
 		// debug message
 		if (debug) console.log(`command ${command.data.name} > registered`);
+	}
+};
+
+const contexts = async (client, dir) => {
+	// get all files in {dir}
+	const files = await fs.readdir(dir).catch(() => []);
+
+	// return if there are no files
+	if (!files) return;
+
+	// loop through context menu files
+	for await (const file of files) {
+		// if file is folder run function recursively
+		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
+			contexts(client, `./${dir}/${file}`);
+			continue;
+		}
+
+		// import context menu from file
+		const command = await import(`../${dir}/${file}`);
+		// if no data skip registering context menu
+		if (!command.data) {
+			// debug message
+			if (debug) console.log(`${dir}/${file} > no data`);
+			continue;
+		}
+		// add context menu to collection
+		client.contexts.set(command.data.name, command);
+		// debug message
+		if (debug) console.log(`context menu ${command.data.name} > registered`);
 	}
 };
 
@@ -54,7 +85,7 @@ const buttons = async (client, dir) => {
 			// debug message
 			if (debug) console.log(`${dir}/${file} > no data`);
 			continue;
-		};
+		}
 		// add button to collection
 		client.buttons.set(button.data.id, button);
 		// debug message
@@ -84,7 +115,7 @@ const menus = async (client, dir) => {
 			// debug message
 			if (debug) console.log(`${dir}/${file} > no data`);
 			continue;
-		};
+		}
 		// add menu to collection
 		client.menus.set(menu.data.id, menu);
 		// debug message
@@ -117,9 +148,9 @@ const events = async (client, dir) => {
 			client.on(event.name, (...args) => event.execute(client, ...args));
 		}
 		// debug message
-		if (debug) console.log(`event ${event.data.name} > registered`);
+		if (debug) console.log(`event ${event.name} > registered`);
 	}
 };
 
 // export all functions
-export { commands, buttons, menus, events };
+export { commands, contexts, buttons, menus, events };

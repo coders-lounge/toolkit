@@ -35,18 +35,18 @@ If you have any feedback, please reach out to us via Discord.
 To run this project, you will need to add the following environment variables to your .env file
 
 1. `BOT_TOKEN` - Your bot token found at the [Discord Developer Portal](https://discord.com/developers)
-3. `GUILD_ID` - The ID of the guild you want to run the bot in.
+2. `GUILD_ID` - The ID of the guild you want to run the bot in.
+3. `DATABASE_URI` - The mongodb URI, this allows for the storage and retrieval of data.
 
 ## Commands
 
-All commands require the following data exports:
+All commands require the following exports:
 
 ```js
 export const data = {
 	name: 'name',
 	description: 'a description of what the command does',
 	options: [], // optional - array of #ApplicationCommandOption
-  type: 'CHAT_INPUT', // optional - one of CHAT_INPUT, USER, MESSAGE will default to CHAT_INPUT
 	defaultPermissions: false, // optional - boolean whether to allow access by default
 };
 
@@ -54,6 +54,20 @@ export const permissions = []; // optional - array of #ApplicationCommandPermiss
 
 export const execute = async (client, interaction) => {
 	// command logic in here
+};
+```
+
+## Context Menus
+
+Context menus are the same as [commands](#commands), other than the inclusion of a type field in the data export.
+
+```js
+export const data = {
+	name: 'name',
+	description: 'a description of what the command does',
+	options: [], // optional - array of #ApplicationCommandOption
+	type: 'USER' // optional - string 'USER' or 'MESSAGE'
+	defaultPermissions: false, // optional - boolean whether to allow access by default
 };
 ```
 

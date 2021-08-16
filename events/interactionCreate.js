@@ -1,7 +1,7 @@
 export const name = 'interactionCreate';
 
 export const execute = async (client, interaction) => {
-	// CHAT_INPUT, USER, & MESSAGE commands
+	// CHAT_INPUT commands
 	if (interaction.isCommand()) {
 		// if not in collection return
 		if (!client.commands.has(interaction.commandName)) return;
@@ -13,6 +13,25 @@ export const execute = async (client, interaction) => {
 				.execute(client, interaction);
 		} catch (error) {
 			// respond with error messsage
+			await interaction.reply({
+				content: 'There was an error while executing this command!',
+				ephemeral: true,
+			});
+		}
+	}
+
+	// USER, & MESSAGE commands
+	if (interaction.isContextMenu()) {
+		// if not in collection return
+		if (!client.contexts.has(interaction.commandName)) return;
+
+		try {
+			// execute command logic
+			await client.contexts
+				.get(interaction.commandName)
+				.execute(client, interaction);
+		} catch (error) {
+			// respond with error message
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				ephemeral: true,
@@ -46,9 +65,7 @@ export const execute = async (client, interaction) => {
 
 		try {
 			// execute menu logic
-			await client.menus
-				.get(interaction.customId)
-				.execute(client, interaction);
+			await client.menus.get(interaction.customId).execute(client, interaction);
 		} catch (error) {
 			// respond with error message
 			await interaction.reply({

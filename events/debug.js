@@ -1,5 +1,5 @@
 export const name = 'debug';
 
 export const execute = (client, info) => {
-    console.log(info);
-},;
+	if (process.argv.includes('--debug')) console.log(info);
+};
