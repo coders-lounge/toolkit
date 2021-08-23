@@ -3,10 +3,11 @@ import { MessageActionRow, MessageSelectMenu } from 'discord.js';
 export const data = {
 	name: 'menu',
 	description: 'Creates a menu',
+	defaultPermission: false,
 };
 
 export const execute = async (client, interaction) => {
-    // create menu with two options
+	// create menu with two options
 	const menu = new MessageSelectMenu()
 		.setCustomId('select')
 		.setPlaceholder('Nothing selected')
@@ -23,9 +24,9 @@ export const execute = async (client, interaction) => {
 			},
 		]);
 
-    // add menu to an action row
+	// add menu to an action row
 	const row = new MessageActionRow().addComponents(menu);
 
-    // respond with message and action row
+	// respond with message and action row
 	await interaction.reply({ content: 'ping...', components: [row] });
 };

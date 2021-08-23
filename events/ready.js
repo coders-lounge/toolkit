@@ -32,7 +32,7 @@ export const execute = async (client) => {
 	});
 
 	// set context menus
-	client.contexts.each(async (command) => {
+	client.contexts?.each(async (command) => {
 		const cmd = await client.application.commands.create(
 			command.data,
 			process.env.GUILD_ID || undefined
