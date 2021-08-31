@@ -8,14 +8,14 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-// client.contexts = new Collection();
-// client.buttons = new Collection();
-// client.menus = new Collection();
+client.contexts = new Collection();
+client.buttons = new Collection();
+client.menus = new Collection();
 
 await commands(client, './commands');
-// await contexts(client, './context menus');
-// await buttons(client, './components/buttons');
-// await menus(client, './components/menus');
+await contexts(client, './context menus');
+await buttons(client, './components/buttons');
+await menus(client, './components/menus');
 await events(client, './events');
 
 client.login(process.env.BOT_TOKEN);

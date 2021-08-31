@@ -8,11 +8,10 @@ export const execute = async (client, interaction) => {
 
 		try {
 			// execute command logic
-			await client.commands
-				.get(interaction.commandName)
-				.execute(client, interaction);
+			await client.commands.get(interaction.commandName).execute(client, interaction);
 		} catch (error) {
 			// respond with error messsage
+			console.log(error);
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				ephemeral: true,
@@ -27,11 +26,10 @@ export const execute = async (client, interaction) => {
 
 		try {
 			// execute command logic
-			await client.contexts
-				.get(interaction.commandName)
-				.execute(client, interaction);
+			await client.contexts.get(interaction.commandName).execute(client, interaction);
 		} catch (error) {
 			// respond with error message
+			console.log(error);
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				ephemeral: true,
@@ -46,11 +44,10 @@ export const execute = async (client, interaction) => {
 
 		try {
 			// execute button logic
-			await client.buttons
-				.get(interaction.customId)
-				.execute(client, interaction);
+			await client.buttons.get(interaction.customId).execute(client, interaction);
 		} catch (error) {
 			// respond with error message
+			console.log(error);
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				ephemeral: true,
@@ -68,6 +65,7 @@ export const execute = async (client, interaction) => {
 			await client.menus.get(interaction.customId).execute(client, interaction);
 		} catch (error) {
 			// respond with error message
+			console.log(error);
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				ephemeral: true,
