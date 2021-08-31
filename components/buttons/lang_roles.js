@@ -46,7 +46,7 @@ export const execute = async (client, interaction) => {
 			{
 				label: 'Java',
 				value: 'java',
-				default: interaction.member.roles.cache.has('766049207495819315'),
+				default: interaction.member.roles.cache.has('766051595418468362'),
 			},
 			{
 				label: 'HTML/CSS',
