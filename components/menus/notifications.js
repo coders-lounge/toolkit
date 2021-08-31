@@ -1,6 +1,4 @@
-export const data = {
-	id: 'notification_roles',
-};
+export const id = 'notification_roles';
 
 const roles = {
 	announce: '765938839734190112',

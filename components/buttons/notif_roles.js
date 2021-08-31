@@ -1,8 +1,6 @@
 import { MessageSelectMenu, MessageActionRow } from 'discord.js';
 
-export const data = {
-	id: 'notif_roles',
-};
+export const id = 'notif_roles';
 
 export const execute = async (client, interaction) => {
 	const roles = new MessageSelectMenu()

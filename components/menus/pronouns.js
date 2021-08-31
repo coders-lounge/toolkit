@@ -1,6 +1,4 @@
-export const data = {
-	id: 'pronoun_roles',
-};
+export const id = 'pronoun_roles';
 
 const roles = {
 	he_him: '882285832915005480',

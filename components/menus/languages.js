@@ -1,6 +1,4 @@
-export const data = {
-	id: 'language_roles',
-};
+export const id = 'language_roles';
 
 const roles = {
 	js: '766049207495819315',

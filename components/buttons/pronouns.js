@@ -1,8 +1,6 @@
 import { MessageButton, MessageSelectMenu, MessageActionRow } from 'discord.js';
 
-export const data = {
-	id: 'pronouns',
-};
+export const id = 'pronouns';
 
 export const execute = async (client, interaction) => {
 	const pronouns = new MessageButton()
