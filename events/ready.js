@@ -1,8 +1,13 @@
+import { Client } from 'discord.js';
 import mongo from '../utils/mongo.js';
 
 export const name = 'ready';
 export const once = true;
 
+/**
+ * @param {Client} client - The instantiated client object
+ * @returns {void}
+ */
 export const execute = async (client) => {
 	console.log(`${client.user.tag} >> Logged in!`);
 	client.user.setPresence({
@@ -13,9 +18,7 @@ export const execute = async (client) => {
 	// log into the database
 	await mongo().then((mongoose) => {
 		try {
-			console.log(
-				'Database >> Connected to mongoose. Database fully operational!'
-			);
+			console.log('Database >> Connected to mongoose. Database fully operational!');
 		} finally {
 			mongoose.connection.close();
 		}
@@ -27,8 +30,7 @@ export const execute = async (client) => {
 			command.data,
 			process.env.GUILD_ID || undefined
 		);
-		if (command.permissions)
-			cmd.permissions?.set({ permissions: command.permissions });
+		if (command.permissions) cmd.permissions?.set({ permissions: command.permissions });
 	});
 
 	// set context menus
@@ -37,7 +39,6 @@ export const execute = async (client) => {
 			command.data,
 			process.env.GUILD_ID || undefined
 		);
-		if (command.permissions)
-			cmd.permissions?.set({ permissions: command.permissions });
+		if (command.permissions) cmd.permissions?.set({ permissions: command.permissions });
 	});
 };

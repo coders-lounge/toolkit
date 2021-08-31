@@ -1,7 +1,14 @@
+import { Client, GuildMember } from 'discord.js';
+
 export const name = 'guildMemberAdd';
 
 const roles = ['765938839734190113', '765938839734190112'];
 
+/**
+ * @param {Client} client - The instantiated client object
+ * @param {GuildMember} member - The Member object
+ * @returns {void}
+ */
 export const execute = (client, member) => {
 	const channel = member.guild.channels.cache.get('765938840190844974');
 

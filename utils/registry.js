@@ -1,6 +1,10 @@
-import { Collection } from 'discord.js';
+import { Client, Collection } from 'discord.js';
 import * as fs from 'fs/promises';
 
+/**
+ * @param {string} dir - The directory to load commands from.
+ * @returns {Promise<Collection<string, any> | void>} - A collection of commands.
+ */
 async function commands(dir) {
 	// get all files in {dir}
 	const files = await fs.readdir(dir).catch(() => []);
@@ -30,6 +34,10 @@ async function commands(dir) {
 	return cmds;
 }
 
+/**
+ * @param {string} dir - The directory to load components from.
+ * @returns {Promise<Collection<string, any> | void>} - A collection of components.
+ */
 const components = async (dir) => {
 	// get all files in {dir}
 	const files = await fs.readdir(dir).catch(() => []);
@@ -59,6 +67,11 @@ const components = async (dir) => {
 	return comps;
 };
 
+/**
+ * @param {Client} client - The client to bind events to.
+ * @param {string} dir - The directory to load events from.
+ * @returns {Promise<void>}
+ */
 async function events(client, dir) {
 	const files = await fs.readdir(dir).catch(() => []);
 

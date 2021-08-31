@@ -1,3 +1,5 @@
+import { Client, SelectMenuInteraction } from 'discord.js';
+
 export const id = 'notification_roles';
 
 const roles = {
@@ -5,6 +7,11 @@ const roles = {
 	revive: '765938839734190111',
 };
 
+/**
+ * @param {Client} client The instantiated client object
+ * @param {SelectMenuInteraction} interaction The Interaction object
+ * @returns {void}
+ */
 export const execute = async (client, interaction) => {
 	const options = interaction.values;
 

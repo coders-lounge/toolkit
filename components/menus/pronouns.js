@@ -1,3 +1,5 @@
+import { Client, SelectMenuInteraction } from 'discord.js';
+
 export const id = 'pronoun_roles';
 
 const roles = {
@@ -7,6 +9,11 @@ const roles = {
 	other: '882286100071186432',
 };
 
+/**
+ * @param {Client} client The instantiated client object
+ * @param {SelectMenuInteraction} interaction The Interaction object
+ * @returns {void}
+ */
 export const execute = async (client, interaction) => {
 	const options = interaction.values;
 

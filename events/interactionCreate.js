@@ -1,5 +1,12 @@
+import { Client, Interaction } from 'discord.js';
+
 export const name = 'interactionCreate';
 
+/**
+ * @param {Client} client - The instantiated client object
+ * @param {Interaction} interaction - The Interaction object
+ * @returns {void}
+ */
 export const execute = async (client, interaction) => {
 	// CHAT_INPUT commands
 	if (interaction.isCommand()) {

@@ -1,10 +1,24 @@
-import { MessageButton, MessageSelectMenu, MessageActionRow } from 'discord.js';
+import {
+	Client,
+	CommandInteraction,
+	MessageButton,
+	MessageSelectMenu,
+	MessageActionRow,
+} from 'discord.js';
 
+/**
+ * @type {import('discord.js').ApplicationCommandData}
+ */
 export const data = {
 	name: 'roles',
 	description: 'Open the chooseable roles menu',
 };
 
+/**
+ * @param {Client} client - The instantiated client object
+ * @param {CommandInteraction} interaction - The Interaction object
+ * @returns {void}
+ */
 export const execute = async (client, interaction) => {
 	const pronouns = new MessageButton().setLabel('Pronouns').setStyle('PRIMARY');
 	interaction.channel.id === '765938840190844973'

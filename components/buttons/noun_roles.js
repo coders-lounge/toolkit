@@ -1,7 +1,17 @@
-import { MessageSelectMenu, MessageActionRow } from 'discord.js';
+import {
+	Client,
+	ButtonInteraction,
+	MessageSelectMenu,
+	MessageActionRow,
+} from 'discord.js';
 
 export const id = 'noun_roles';
 
+/**
+ * @param {Client} client - The instantiated client object
+ * @param {ButtonInteraction} interaction - The Interaction object
+ * @returns {void}
+ */
 export const execute = async (client, interaction) => {
 	const roles = new MessageSelectMenu()
 		.setCustomId('pronoun_roles')
