@@ -13,8 +13,8 @@ const client = new Client({
 
 client.commands = await commands('./commands');
 client.contexts = await commands('./context menus');
-client.buttons = await components('./components/menus');
-client.menus = await components('./components/buttons');
+client.buttons = await components('./components/buttons');
+client.menus = await components('./components/menus');
 
 await events(client, './events');
 

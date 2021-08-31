@@ -15,30 +15,37 @@ export const execute = async (client) => {
 		status: 'online',
 	});
 
-	// log into the database
-	await mongo().then((mongoose) => {
-		try {
-			console.log('Database >> Connected to mongoose. Database fully operational!');
-		} finally {
-			mongoose.connection.close();
+	const cmds = await client.application.commands.fetch({
+		guildId: process.env.GUILD_ID || undefined,
+	});
+
+	const commands = client.commands.concat(client.contexts);
+
+	// delete/edit already registered commands
+	cmds.each(async (command) => {
+		const cmd = commands.get(command.name);
+		if (!cmd)
+			client.application.commands.delete(command, process.env.GUILD_ID || undefined);
+		else {
+			const c = await client.application.commands.create(
+				cmd.data,
+				process.env.GUILD_ID || undefined
+			);
+			if (cmd.permissions) c.permissions?.set({ permissions: cmd.permissions });
+			commands.set(cmd.name, { ...cmd, registered: true });
 		}
 	});
 
-	// set commands
-	client.commands.each(async (command) => {
-		const cmd = await client.application.commands.create(
-			command.data,
-			process.env.GUILD_ID || undefined
-		);
-		if (command.permissions) cmd.permissions?.set({ permissions: command.permissions });
-	});
+	// register new commands
+	commands
+		.filter((c) => c.registered !== true)
+		.each(async (command) => {
+			const cmd = await client.application.commands.create(
+				command.data,
+				process.env.GUILD_ID || undefined
+			);
+			if (command.permissions) cmd.permissions?.set({ permissions: command.permissions });
+		});
 
-	// set context menus
-	client.contexts?.each(async (command) => {
-		const cmd = await client.application.commands.create(
-			command.data,
-			process.env.GUILD_ID || undefined
-		);
-		if (command.permissions) cmd.permissions?.set({ permissions: command.permissions });
-	});
+	console.log('Registered all commands');
 };
