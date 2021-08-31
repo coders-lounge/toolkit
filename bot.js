@@ -4,7 +4,11 @@ import 'dotenv/config';
 import { commands, contexts, buttons, events, menus } from './utils/registry.js';
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS,
+	],
 });
 
 client.commands = new Collection();
