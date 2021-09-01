@@ -70,7 +70,7 @@ export const execute = async (client, interaction) => {
 	const menu = new MessageActionRow().addComponents([roles]);
 
 	// update the message
-	if (interaction.channel.id === '') {
+	if (interaction.channel.id === '765938840190844973') {
 		await interaction.reply({
 			content: 'Pronoun Roles:',
 			components: [menu],
