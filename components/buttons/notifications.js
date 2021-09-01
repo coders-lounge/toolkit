@@ -56,5 +56,13 @@ export const execute = async (client, interaction) => {
 	const menu = new MessageActionRow().addComponents([roles]);
 
 	// update the message
-	await interaction.update({ components: [buttons, menu] });
+	if (interaction.channel.id === '') {
+		await interaction.reply({
+			content: 'Notification Roles:',
+			components: [menu],
+			ephemeral: true,
+		});
+	} else {
+		await interaction.update({ components: [buttons, menu] });
+	}
 };

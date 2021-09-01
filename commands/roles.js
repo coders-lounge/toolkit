@@ -20,20 +20,20 @@ export const data = {
  * @returns {void}
  */
 export const execute = async (client, interaction) => {
-	const pronouns = new MessageButton().setLabel('Pronouns').setStyle('PRIMARY');
-	interaction.channel.id === '765938840190844973'
-		? pronouns.setCustomId('noun_roles')
-		: pronouns.setCustomId('pronouns');
+	const pronouns = new MessageButton()
+		.setLabel('Pronouns')
+		.setStyle('PRIMARY')
+		.setCustomId('pronouns');
 
-	const notifications = new MessageButton().setLabel('Notifications').setStyle('PRIMARY');
-	interaction.channel.id === '765938840190844973'
-		? notifications.setCustomId('notif_roles')
-		: notifications.setCustomId('notifications');
+	const notifications = new MessageButton()
+		.setLabel('Notifications')
+		.setStyle('PRIMARY')
+		.setCustomId('notifications');
 
-	const languages = new MessageButton().setLabel('Languages').setStyle('PRIMARY');
-	interaction.channel.id === '765938840190844973'
-		? languages.setCustomId('lang_roles')
-		: languages.setCustomId('languages');
+	const languages = new MessageButton()
+		.setLabel('Languages')
+		.setStyle('PRIMARY')
+		.setCustomId('languages');
 
 	const roles = new MessageSelectMenu()
 		.setCustomId('pronoun_roles')
