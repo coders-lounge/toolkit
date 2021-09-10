@@ -9,7 +9,7 @@ export const name = 'interactionCreate';
  * @returns {void}
  */
 export const execute = async (client, interaction) => {
-	if (interaction.guild.id !== '854750621257564171') return;
+	if (interaction.guild.id !== process.env.GUILD_ID) return;
 
 	// CHAT_INPUT commands
 	if (interaction.isCommand()) {
