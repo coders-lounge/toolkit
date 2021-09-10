@@ -77,7 +77,7 @@ export const execute = async (client, interaction) => {
 	p_cases.forEach((_case) => {
 		embed.addField(
 			`\`${_case.type}\` - <t:${_case.timestamp}>`,
-			`[#${_case.id}](${_case.url}) ${_case.reason}`
+			`[#${_case.id}](${_case.url}) | **${_case.reason}**`
 		);
 	});
 
