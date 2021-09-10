@@ -1,5 +1,4 @@
 import { Client } from 'discord.js';
-import mongo from '../utils/mongo.js';
 
 export const name = 'ready';
 export const once = true;
@@ -10,10 +9,7 @@ export const once = true;
  */
 export const execute = async (client) => {
 	console.log(`${client.user.tag} >> Logged in!`);
-	client.user.setPresence({
-		activity: { name: 'new releases', type: 'WATCHING' },
-		status: 'online',
-	});
+	client.user.setActivity("Coder's Lounge", { type: 'WATCHING' });
 
 	const cmds = await client.application.commands.fetch({
 		guildId: process.env.GUILD_ID || undefined,

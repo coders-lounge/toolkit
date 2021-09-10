@@ -1,4 +1,5 @@
 import { Client, Interaction } from 'discord.js';
+import 'dotenv/config';
 
 export const name = 'interactionCreate';
 
@@ -8,6 +9,8 @@ export const name = 'interactionCreate';
  * @returns {void}
  */
 export const execute = async (client, interaction) => {
+	if (interaction.guild.id !== '854750621257564171') return;
+
 	// CHAT_INPUT commands
 	if (interaction.isCommand()) {
 		// if not in collection return

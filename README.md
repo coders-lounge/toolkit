@@ -36,7 +36,6 @@ To run this project, you will need to add the following environment variables to
 
 1. `BOT_TOKEN` - Your bot token found at the [Discord Developer Portal](https://discord.com/developers)
 2. `GUILD_ID` - The ID of the guild you want to run the bot in.
-3. `DATABASE_URI` - The mongodb URI, this allows for the storage and retrieval of data.
 
 ## Commands
 

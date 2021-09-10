@@ -9,7 +9,7 @@ async function commands(dir) {
 	// get all files in {dir}
 	const files = await fs.readdir(dir).catch(() => []);
 	// create collection
-	const cmds = new Collection();
+	let cmds = new Collection();
 
 	// return if there are no files
 	if (!files) return;
@@ -18,7 +18,7 @@ async function commands(dir) {
 	for await (const file of files) {
 		// if file is folder run fuction recursively
 		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
-			commands(`./${dir}/${file}`);
+			cmds = cmds.concat(await commands(`./${dir}/${file}`));
 			continue;
 		}
 
@@ -38,11 +38,11 @@ async function commands(dir) {
  * @param {string} dir - The directory to load components from.
  * @returns {Promise<Collection<string, any> | void>} - A collection of components.
  */
-const components = async (dir) => {
+async function components(dir) {
 	// get all files in {dir}
 	const files = await fs.readdir(dir).catch(() => []);
 	// create collection
-	const comps = new Collection();
+	let comps = new Collection();
 
 	// return if there are no files
 	if (!files) return;
@@ -51,7 +51,7 @@ const components = async (dir) => {
 	for await (const file of files) {
 		// if file is folder run fuction recursively
 		if ((await fs.stat(`./${dir}/${file}`)).isDirectory()) {
-			components(`./${dir}/${file}`);
+			comps = comps.concat(await components(`./${dir}/${file}`));
 			continue;
 		}
 
@@ -65,7 +65,7 @@ const components = async (dir) => {
 
 	// return collection
 	return comps;
-};
+}
 
 /**
  * @param {Client} client - The client to bind events to.
