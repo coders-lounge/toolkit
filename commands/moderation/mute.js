@@ -1,22 +1,56 @@
 import { Client, CommandInteraction } from 'discord.js';
+import { parseDuration } from '../../utils/helpers.js';
+import mute from '../../utils/functions/mute.js';
 
 /**
  * @type {import('discord.js').ApplicationCommandData}
  */
 export const data = {
-	name: 'kick',
-	description: 'Kick a user.',
+	name: 'mute',
+	description: 'mute a user.',
 	options: [
 		{
 			name: 'user',
 			type: 'USER',
-			description: 'The user to kick',
+			description: 'The user to mute',
 			required: true,
+		},
+		{
+			name: 'duration',
+			type: 'STRING',
+			description: 'The duration of the mute',
+			required: true,
+			choices: [
+				{
+					name: 'infinite',
+					value: 'inf',
+				},
+				{
+					name: '10m',
+					value: '10m',
+				},
+				{
+					name: '20m',
+					value: '20m',
+				},
+				{
+					name: '30m',
+					value: '30m',
+				},
+				{
+					name: '1h',
+					value: '1h',
+				},
+				{
+					name: '12h',
+					value: '12h',
+				},
+			],
 		},
 		{
 			name: 'reason',
 			type: 'STRING',
-			description: 'The reason for the kick',
+			description: 'The reason for the mute',
 			required: true,
 		},
 	],
@@ -57,30 +91,18 @@ export const permissions = [
 export const execute = async (client, interaction) => {
 	const member = interaction.options.getMember('user');
 	const reason = interaction.options.getString('reason');
+	const duration = 10000; //parseDuration(interaction.options.getString('duration'));
 
 	// if (member.id === interaction.member.id) {
-	// 	return await interaction.reply("You can't kick yourself!");
+	// 	return await interaction.reply("You can't mute yourself!");
 	// }
 
 	// if (member.id === client.user.id) {
-	// 	return await interaction.reply("You can't kick me!");
+	// 	return await interaction.reply("You can't mute me!");
 	// }
 
-	if (!member.kickable) return await interaction.reply("I can't kick this user!");
-
-	await member.kick(reason);
-
-	const reply = await interaction.reply({
-		content: `**${member.user.tag}** has been kicked | ${reason}`,
-		fetchReply: true,
-	});
-
-	await Case.create({
-		type: 'kick',
-		member: member.id,
-		moderator: interaction.member.id,
-		reason: reason,
-		url: reply.url,
-		timestamp: Math.floor(Date.now() / 1000),
-	});
+	const result = await mute(client, member.id, interaction.member.id, reason, duration);
+	result
+		? await interaction.reply(`**${member.user.tag}** has been muted | ${reason}`)
+		: await interaction.reply(`Unable to mute **${member.user.tag}**`);
 };

@@ -67,6 +67,11 @@ export const permissions = [
 		permission: true,
 	},
 	{
+		id: '858658457359351808',
+		type: 'ROLE',
+		permission: true,
+	},
+	{
 		id: '765938839742185493',
 		type: 'ROLE',
 		permission: true,

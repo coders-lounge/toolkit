@@ -33,6 +33,11 @@ export const permissions = [
 		permission: true,
 	},
 	{
+		id: '858658457359351808',
+		type: 'ROLE',
+		permission: true,
+	},
+	{
 		id: '765938839742185493',
 		type: 'ROLE',
 		permission: true,
@@ -63,6 +68,8 @@ export const execute = async (client, interaction) => {
 
 	if (!member.bannable) return await interaction.reply("I can't ban this user!");
 
+	await member.ban();
+
 	const reply = await interaction.reply({
 		content: `**${member.user.tag}** has been banned | ${reason}`,
 		fetchReply: true,
@@ -76,6 +83,4 @@ export const execute = async (client, interaction) => {
 		url: reply.url,
 		timestamp: Math.floor(Date.now() / 1000),
 	});
-
-	await member.ban();
 };

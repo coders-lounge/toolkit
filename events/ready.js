@@ -1,4 +1,5 @@
 import { Client } from 'discord.js';
+import { loadMutes } from '../utils/mutes.js';
 
 export const name = 'ready';
 export const once = true;
@@ -18,19 +19,19 @@ export const execute = async (client) => {
 	const commands = client.commands.concat(client.contexts);
 
 	// delete/edit already registered commands
-	cmds.each(async (command) => {
-		const cmd = commands.get(command.name);
-		if (!cmd)
-			client.application.commands.delete(command, process.env.GUILD_ID || undefined);
-		else {
-			const c = await client.application.commands.create(
-				cmd.data,
-				process.env.GUILD_ID || undefined
-			);
-			if (cmd.permissions) c.permissions?.set({ permissions: cmd.permissions });
-			commands.set(cmd.name, { ...cmd, registered: true });
-		}
-	});
+	// cmds.each(async (command) => {
+	// 	const cmd = commands.get(command.name);
+	// 	if (!cmd)
+	// 		client.application.commands.delete(command, process.env.GUILD_ID || undefined);
+	// 	else {
+	// 		const c = await client.application.commands.create(
+	// 			cmd.data,
+	// 			process.env.GUILD_ID || undefined
+	// 		);
+	// 		if (cmd.permissions) c.permissions?.set({ permissions: cmd.permissions });
+	// 		commands.set(cmd.name, { ...cmd, registered: true });
+	// 	}
+	// });
 
 	// register new commands
 	commands
@@ -44,4 +45,6 @@ export const execute = async (client) => {
 		});
 
 	console.log('Registered all commands');
+
+	await loadMutes(client);
 };

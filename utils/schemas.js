@@ -59,4 +59,27 @@ export const Case = sequelize.define(
 	{ timestamps: false }
 );
 
+export const Mute = sequelize.define(
+	'Mute',
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		reason: {
+			type: DataTypes.STRING,
+		},
+		case_id: {
+			type: DataTypes.INTEGER,
+		},
+		timestamp: {
+			type: DataTypes.DATE,
+		},
+	},
+	{ timestamps: false }
+);
+
+Mute.hasOne(Case, { foreignKey: 'case_id' });
+
 sequelize.sync();
