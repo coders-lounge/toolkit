@@ -110,7 +110,7 @@ export const execute = async (client, interaction) => {
 	);
 	if (typeof result === 'number') {
 		return await interaction.reply(
-			`${member.user.tag} has been muted for ${duration} | ${reason}`
+			`**${member.user.tag}** has been muted for ${duration} | ${reason}`
 		);
 	}
 	result

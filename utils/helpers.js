@@ -1,7 +1,7 @@
 /**
  * Can currently only be used for the following: [inf, 10m, 20m, 30m, 1h, 12h] I will make it more flexible later
  * @param {String} duration - The duration to parse
- * @returns {Number} The parsed duration in milliseconds
+ * @returns {Number|'inf'} The parsed duration in milliseconds
  */
 export function parseDuration(duration) {
 	const units = {
@@ -12,7 +12,7 @@ export function parseDuration(duration) {
 
 	switch (duration) {
 		case 'inf':
-			return 0;
+			return 'inf';
 		case '10m':
 			return units.m * 10;
 		case '20m':

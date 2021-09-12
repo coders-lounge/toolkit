@@ -106,7 +106,7 @@ export const execute = async (client, interaction) => {
 
 	if (typeof result === 'number')
 		return await interaction.reply(
-			`${member.user.tag} will be unmuted in ${delay} | ${reason}`
+			`**${member.user.tag}** will be unmuted in ${delay} | ${reason}`
 		);
 	result
 		? await interaction.reply(`**${member.user.tag}** has been unmuted | ${reason}`)
