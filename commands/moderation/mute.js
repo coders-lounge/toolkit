@@ -91,7 +91,7 @@ export const permissions = [
 export const execute = async (client, interaction) => {
 	const member = interaction.options.getMember('user');
 	const reason = interaction.options.getString('reason');
-	const duration = 10000; //parseDuration(interaction.options.getString('duration'));
+	const duration = parseDuration(interaction.options.getString('duration'));
 
 	// if (member.id === interaction.member.id) {
 	// 	return await interaction.reply("You can't mute yourself!");
