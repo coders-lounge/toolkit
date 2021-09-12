@@ -37,6 +37,7 @@ export default async function mute(client, user, moderator, reason, duration) {
 			timestamp: Date.now() + duration,
 		});
 		createMute(client, member.id, moderator, 'Automatic', duration, _case.id);
+		return duration;
 	}
 
 	return true;

@@ -91,7 +91,7 @@ export const permissions = [
 export const execute = async (client, interaction) => {
 	const member = interaction.options.getMember('user');
 	const reason = interaction.options.getString('reason');
-	const duration = parseDuration(interaction.options.getString('duration'));
+	const duration = interaction.options.getString('duration');
 
 	// if (member.id === interaction.member.id) {
 	// 	return await interaction.reply("You can't mute yourself!");
@@ -101,7 +101,18 @@ export const execute = async (client, interaction) => {
 	// 	return await interaction.reply("You can't mute me!");
 	// }
 
-	const result = await mute(client, member.id, interaction.member.id, reason, duration);
+	const result = await mute(
+		client,
+		member.id,
+		interaction.member.id,
+		reason,
+		parseDuration(duration)
+	);
+	if (typeof result === 'number') {
+		return await interaction.reply(
+			`${member.user.tag} has been muted for ${duration} | ${reason}`
+		);
+	}
 	result
 		? await interaction.reply(`**${member.user.tag}** has been muted | ${reason}`)
 		: await interaction.reply(`Unable to mute **${member.user.tag}**`);
