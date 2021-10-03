@@ -32,7 +32,7 @@ export const execute = async (client, interaction) => {
 	const roles = new MessageSelectMenu()
 		.setCustomId('notification_roles')
 		.setMinValues(0)
-		.setMaxValues(2)
+		.setMaxValues(3)
 		.addOptions([
 			{
 				label: 'Announcements',
