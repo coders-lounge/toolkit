@@ -80,6 +80,4 @@ export const Mute = sequelize.define(
 	{ timestamps: false }
 );
 
-Mute.hasOne(Case, { foreignKey: 'case_id' });
-
 sequelize.sync();

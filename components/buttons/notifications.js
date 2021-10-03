@@ -44,6 +44,11 @@ export const execute = async (client, interaction) => {
 				value: 'revive',
 				default: interaction.member.roles.cache.has('765938839734190111'),
 			},
+			{
+				label: 'Courses',
+				value: 'learn',
+				default: interaction.member.roles.cache.has('894300648798048276'),
+			},
 		])
 		.setPlaceholder('Choose roles');
 
