@@ -1,6 +1,5 @@
 import { Client, CommandInteraction, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
-import fetch from 'node-fetch';
-import fs from 'fs';
+import parseCodeBlock from '../utils/functions/parseCodeBlock.js';
 import request from 'request';
 /**
  * @type {import('discord.js').ApplicationCommandData}
@@ -16,48 +15,15 @@ export const data = {
  * @returns {void}
  */
 export const execute = async (client, interaction) => {
-    await interaction.deferReply();
     const message = interaction.options.getMessage('message');
-	let lines = message.content.split("\n");
-    let lang = lines[0].slice(3);
-    const indices = await JSON.parse(fs.readFileSync("./languageVersions.json"));
-    let languageData;
-    Object.values(indices).forEach(langObj => {  // checking if the language in the code block is valid
-        if(langObj.ext.includes(lang)){
-            languageData = langObj;
-        }
-    })
-    if(!languageData){
-        await interaction.editReply({ 
-            content: "Invalid language or format, here's an example of what it should look like:", 
-            files: ['https://media.discordapp.net/attachments/834443815205077032/896600964730077214/DiscordPTB_fr8ZVfRTa3.png?width=900&height=255']
-        });
-        return;
-    }
-    const index = languageData.id;
-    let endCodeLine;
-    let input = "";
-    let code = "";
-    for(let i = 1; i < lines.length; i ++){  // finding the code block, adding formatting
-        if(lines[i].startsWith('```')){ 
-            endCodeLine = i;
-            break;
-        }
-        code += lines[i];
-        code += "\n";
-    }
-    if(endCodeLine != lines.length-1){  // if the code block is not the last line i.e. there is input
-        for(let i = endCodeLine+1; i < lines.length;i ++){
-            input += lines[i];
-        }
-    }
-    code.trim(); 
+	const code = await parseCodeBlock(message, interaction);
+    if(!code) return;
     const body = {
-        "source_code": code,
-        "language_id": index,
-        "stdin": input
+        "source_code": code[2],
+        "language_id": code[0],
+        "stdin": code[3]
     }
-    interaction.editReply('Found code, compiling...');
+    interaction.reply('Found code, compiling...');
     const POSToptions = {
         method: 'POST',
         url: 'https://judge0-ce.p.rapidapi.com/submissions',
@@ -89,12 +55,12 @@ export const execute = async (client, interaction) => {
             try{
               body = JSON.parse(body);
                 if(body['stdout']){  // there was output to the code
-                    interaction.editReply({embeds: [new MessageEmbed()
+                    interaction.editReply({ content: 'Compiled!', embeds: [new MessageEmbed()
                         .setColor('#5664F3')
                         .setFooter(message.member.nickname, message.author.avatarURL())
                         .setTitle("🟢 Accepted")
                         .setThumbnail(languageData.image)
-                        .setDescription(`\`\`\`${code}\`\`\``)
+                        .setDescription(`\`\`\`${code[1]}\`\`\``)
                         .addField("Output: ", body['stdout'], true)
                         .addField("Status: ", body['status']['description'], true)
                         .addField('\u200B', '\u200B')
@@ -105,7 +71,7 @@ export const execute = async (client, interaction) => {
                     )
                 }
                 else if(body['status'] === "Processing"){  // code is still running
-                    interaction.editReply({embeds: [new MessageEmbed()
+                    interaction.editReply({ content: 'Compiled!', embeds: [new MessageEmbed()
                         .setColor('#5664F3')
                         .setFooter(message.member.nickname, message.author.avatarURL())
                         .setTitle("🟢 Try that again")
@@ -113,7 +79,7 @@ export const execute = async (client, interaction) => {
                     )
                 }
                 else{ // code didn't have an output
-                    interaction.editReply({embeds: [new MessageEmbed()
+                    interaction.editReply({ content: 'Compiled!', embeds: [new MessageEmbed()
                         .setColor('#5664F3')
                         .setFooter(message.member.nickname, message.author.avatarURL())
                         .setTitle("🟢 Accepted")
