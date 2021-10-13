@@ -26,7 +26,7 @@ export const execute = async (client, interaction) => {
     interaction.reply('Found code, compiling...');
     const POSToptions = {
         method: 'POST',
-        url: 'https://judge0-ce.p.rapidapi.com/submissions',
+        url: 'http://localhost:2358/submissions',
         qs: {base64_encoded: 'false', fields: '*'},
         headers: {
             'content-type': 'application/json',
@@ -42,7 +42,7 @@ export const execute = async (client, interaction) => {
         const token = body['token'];
         const GEToptions = {
                 method: 'GET',
-                url: 'https://judge0-ce.p.rapidapi.com/submissions/' + token,
+                url: 'http://localhost:2358/submissions/' + token,
                 qs: {base64_encoded: 'false', fields: '*'},
                 headers: {
                     'x-rapidapi-key': process.env.JUDGE_API_KEY,
