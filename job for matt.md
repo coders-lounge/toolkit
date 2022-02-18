@@ -1,1 +1,0 @@
-change the 'CHANNEL_ID' in /events/messageCreate.js to the id of the suggestions channel
