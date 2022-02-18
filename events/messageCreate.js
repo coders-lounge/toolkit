@@ -11,7 +11,7 @@ export const execute = (client, message) => {
 	//ignore if the authour is the bot
 	if (message.author.bot) return;
 	//reply to the message
-	if (message.channel == 'CHANNEL_ID') {
+	if (message.channel == '896344115044835358') {
 		//add reactons to the mesage
 		message.react('👍');
 		message.react('👎');
