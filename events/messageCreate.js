@@ -4,19 +4,19 @@ export const name = 'messageCreate';
 
 /**
  * @param {Client} client - The instantiated client object
- * @param {string} info - The message object
+ * @param {string} message - The message object
  * @returns {void}
  */
-export const execute = (client, info) => {
+export const execute = (client, message) => {
 	//ignore if the authour is the bot
-	if (info.author.bot) return;
+	if (message.author.bot) return;
 	//reply to the message
-	if (info.channel == 'CHANNEL NAME HERE') {
+	if (message.channel == 'CHANNEL_ID') {
 		//add reactons to the mesage
-		info.react('👍');
-		info.react('👎');
+		message.react('👍');
+		message.react('👎');
 		//create a thread
-		info.channel.threads.create({
+		message.channel.threads.create({
 			name: 'discussion',
 		});
 	}
