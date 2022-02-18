@@ -17,7 +17,7 @@ export const execute = (client, message) => {
 		message.react('👎');
 		//create a thread
 		message.startThread({
-			name: 'discussion',
+			name: `${message.author.username}\'s suggestion`,
 		});
 	}
 };
