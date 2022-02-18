@@ -16,7 +16,7 @@ export const execute = (client, message) => {
 		message.react('👍');
 		message.react('👎');
 		//create a thread
-		message.channel.threads.create({
+		message.startThread({
 			name: 'discussion',
 		});
 	}
