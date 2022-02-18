@@ -11,13 +11,13 @@ export const execute = (client, message) => {
 	//ignore if the author is the bot
 	if (message.author.bot) return;
 	//reply to the message
-	if (message.channel == '896344115044835358') {
+	if (message.channel == '822140163467509781') {
 		//add reactons to the mesage
 		message.react('👍');
 		message.react('👎');
 		//create a thread
 		message.startThread({
-			name: 'discussion',
+			name: `${message.author.username}\'s suggestion`,
 		});
 	}
 };
